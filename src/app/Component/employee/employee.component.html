@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Management</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-2">
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="add-employee-tab" data-bs-toggle="tab" data-bs-target="#add-employee-tab-pane" type="button" role="tab" aria-controls="add-employee-tab-pane" aria-selected="true">Add Employee</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="list-employee-tab" data-bs-toggle="tab" data-bs-target="#list-employee-tab-pane" type="button" role="tab" aria-controls="list-employee-tab-pane" aria-selected="false">List Employee</button>
+  </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="add-employee-tab-pane" role="tabpanel" aria-labelledby="add-employee-tab" tabindex="0">
+    <div class="container mt-4">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="employeeName" class="form-label">Employee Name</label>
+          <input type="text" class="form-control" id="employeeName">
+        </div>
+        <div class="col-md-6">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password">
+        </div>
+        <div class="col-md-6">
+          <label for="mobileNo" class="form-label">Mobile No</label>
+          <input type="text" class="form-control" id="mobileNo">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="address" class="form-label">Address</label>
+          <input type="text" class="form-control" id="address">
+        </div>
+        <div class="col-md-6">
+          <label for="dob" class="form-label">Date Of Birth</label>
+          <input type="date" class="form-control" id="dob">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="joiningDate" class="form-label">Joining Date</label>
+          <input type="date" class="form-control" id="joiningDate">
+        </div>
+        <!-- Add more fields as needed -->
+      </div>
+      <br/>
+      <div class="row mb-3">
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button class="btn btn-primary btn-lg" type="button">Submit</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+  <div class="tab-pane fade show active" id="list-employee-tab-pane" role="tabpanel" aria-labelledby="list-employee-tab" tabindex="0">
+    <div class="container mt-4">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Employee Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Mobile No</th>
+            <th>Address</th>
+            <th>Date Of Birth</th>
+            <th>Joining Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="employeeList">
+          <!-- Employee records will be added here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="list-employee-tab-pane" role="tabpanel" aria-labelledby="list-employee-tab" tabindex="0">
+    <!-- Content for List Employee tab -->
+    <!-- You can add content for the List Employee tab here -->
+  </div>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+<!-- Initialize tabs -->
+<script>
+  var myTab = new bootstrap.Tab(document.getElementById('myTab'));
+  myTab.show(); // Show the first tab on page load
+
+  // Alternatively, you can use jQuery for tab initialization
+  $(document).ready(function() {
+    $('#myTab a').on('click', function(e) {
+      e.preventDefault();
+      $(this).tab('show');
+      if ($(this).attr('id') === 'list-employee-tab') {
+        displayEmployees(); // Show employees only when List Employee tab is active
+      } else {
+        hideEmployeeList(); // Hide employee list when not on List Employee tab
+      }
+    });
+  });
+
+  // Sample data and display function (similar to previous code)
+  var employees = [
+    {
+      id: 1,
+      name: 'John Doe',
+      email: 'john@example.com',
+      password: '********',
+      mobile: '1234567890',
+      address: '123 Main St, City',
+      dob: '1990-01-01',
+      joiningDate: '2022-01-01'
+    },
+    // Add more employees as needed
+  ];
+
+  function displayEmployees() {
+    $('#employeeList').empty();
+    employees.forEach(function(employee) {
+      var row = `<tr>
+                    <td>${employee.name}</td>
+                    <td>${employee.email}</td>
+                    <td>${employee.password}</td>
+                    <td>${employee.mobile}</td>
+                    <td>${employee.address}</td>
+                    <td>${employee.dob}</td>
+                    <td>${employee.joiningDate}</td>
+                    <td>
+                      <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                      <button type="button" class="btn btn-danger btn-sm ms-1">Delete</button>
+                    </td>
+                </tr>`;
+      $('#employeeList').append(row);
+    });
+  }
+
+  function hideEmployeeList() {
+    $('#employeeList').empty();
+  }
+
+</script>
+</div>
+</body>
+</html>
